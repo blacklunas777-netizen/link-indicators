@@ -2,7 +2,7 @@
 name = "link-indicators"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <email@example.com>"]
+authors = ["joel <joelsperzagni@yahoo.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
