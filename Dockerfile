@@ -1,20 +1,27 @@
 FROM python:3.11-slim
 
-# Install system dependencies
+# Install system dependencies for building packages
 RUN apt-get update && apt-get install -y \
-    curl build-essential python3-dev gcc libffi-dev libssl-dev \
+    build-essential \
+    python3-dev \
+    gcc \
+    g++ \
+    libffi-dev \
+    libssl-dev \
+    libatlas-base-dev \
     && rm -rf /var/lib/apt/lists/*
-
-# Install Poetry
-RUN curl -sSL https://install.python-poetry.org | python3 -
-ENV PATH="/root/.local/bin:$PATH"
 
 WORKDIR /app
 
-COPY pyproject.toml poetry.lock* ./
-RUN poetry install --no-root
+# Upgrade pip and setuptools early
+RUN pip install --upgrade pip setuptools wheel
 
+# Install Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy app code
 COPY . .
 
 EXPOSE 5000
-CMD ["poetry", "run", "python", "app.py"]
+CMD ["python", "app.py"]
