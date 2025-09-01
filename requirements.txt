@@ -1,5 +1,6 @@
 flask
 websocket-client
-pandas
-pandas_ta
+pandas==1.5.3
+pandas_ta==0.3.14b
 setuptools>=65.0.0
+numpy<2.0.0
