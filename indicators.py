@@ -1,4 +1,5 @@
-import pandas as pd, pandas_ta as ta
+import pandas as pd
+import pandas_ta as ta
 from config import THRESHOLDS
 
 def evaluate_signals(candles):
